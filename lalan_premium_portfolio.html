@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lalan Kumar | Premium Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Premium Google Fonts (Outfit & Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        bg: '#050507',
+                        surface: '#0f1015',
+                        surface2: '#181920',
+                        accent: {
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            purple: '#8a2be2'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050507;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-brand {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Smooth Glass Nav */
+        .glass-nav {
+            background: rgba(5, 5, 7, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Animated Text Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #00f2fe, #4facfe, #8a2be2, #00f2fe);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 8s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Profile Image Container Styling */
+        .profile-container {
+            position: relative;
+            z-index: 1;
+        }
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, #00f2fe, #8a2be2, #4facfe);
+            border-radius: 2rem;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.7;
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+        .profile-image {
+            border: 2px solid rgba(255,255,255,0.1);
+            background-color: #181920;
+            object-fit: cover;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: scale(0.98); }
+            100% { opacity: 0.8; transform: scale(1.02); }
+        }
+
+        /* Bento Box Styling (Modern Grid Cards) */
+        .bento-card {
+            background: rgba(15, 16, 21, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .bento-card:hover::before { opacity: 1; }
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .bento-content { position: relative; z-index: 1; }
+
+        /* Stylish Resume Button */
+        .btn-glow {
+            position: relative;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            color: #050507;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        .btn-glow:hover::before { opacity: 1; }
+        .btn-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+        }
+
+        /* 3D Social Icons */
+        .social-link {
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 1rem;
+            background: #181920;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.25rem;
+            color: #a0aec0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.1);
+            color: white;
+            border-color: transparent;
+        }
+        .wa:hover { background: #25d366; box-shadow: 0 10px 20px rgba(37,211,102,0.4); }
+        .in:hover { background: #0077b5; box-shadow: 0 10px 20px rgba(0,119,181,0.4); }
+        .gh:hover { background: #333; box-shadow: 0 10px 20px rgba(255,255,255,0.2); }
+        .ig:hover { background: #E1306C; box-shadow: 0 10px 20px rgba(225,48,108,0.4); }
+        .fb:hover { background: #1877F2; box-shadow: 0 10px 20px rgba(24,119,242,0.4); }
+        .yt:hover { background: #ff0000; box-shadow: 0 10px 20px rgba(255,0,0,0.4); }
+
+        /* Sleek Chatbot */
+        #chatbot-widget { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
+        #chat-window {
+            width: 350px; height: 450px;
+            transform-origin: bottom right;
+            transform: scale(0.9) translateY(20px);
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        #chat-window.active {
+            transform: scale(1) translateY(0);
+            opacity: 1; pointer-events: auto;
+        }
+        .typing-indicator span {
+            display: inline-block; width: 6px; height: 6px;
+            background-color: #00f2fe; border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        /* Scroll Animations */
+        .stagger-anim { opacity: 0; transform: translateY(40px); transition: 0.8s ease-out; }
+        .stagger-anim.is-visible { opacity: 1; transform: translateY(0); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #181920; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4facfe; }
+
+        /* Typewriter Cursor */
+        .cursor { display: inline-block; width: 3px; background-color: #00f2fe; animation: blink 1s step-end infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent-blue/30 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-surface2 flex items-center justify-center border border-white/10 group-hover:border-accent-cyan/50 transition-colors">
+                        <span class="font-heading font-bold text-xl text-gradient">LK</span>
+                    </div>
+                    <span class="nav-brand font-bold text-2xl tracking-wide hidden sm:block">Lalan<span class="text-white">.Dev</span></span>
+                </a>
+                
+                <!-- Links -->
+                <div class="hidden md:flex space-x-8 items-center bg-surface/50 px-8 py-3 rounded-full border border-white/5">
+                    <a href="#about" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+                    <a href="#skills" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Skills</a>
+                    <a href="#projects" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Projects</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <!-- CTA -->
+                <div class="flex items-center gap-4">
+                    <a href="resume.pdf" target="_blank" class="btn-glow px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide hidden sm:flex items-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i> Resume
+                    </a>
+                    <!-- Mobile Menu Btn -->
+                    <button id="mobile-btn" class="md:hidden w-12 h-12 flex items-center justify-center rounded-xl bg-surface2 border border-white/10 text-white">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-24 left-4 right-4 bg-surface2 border border-white/10 rounded-2xl p-4 shadow-2xl">
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="text-white font-medium p-2 hover:bg-white/5 rounded-lg">About</a>
+                <a href="#skills" class="text-white font-medium p-2 hover:bg-white/5 rounded-lg">Skills</a>
+                <a href="#projects" class="text-white font-medium p-2 hover:bg-white/5 rounded-lg">Projects</a>
+                <a href="resume.pdf" target="_blank" class="text-accent-cyan font-bold p-2 hover:bg-white/5 rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Download Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Premium Split Layout) -->
+    <section class="relative pt-40 pb-20 lg:pt-48 lg:pb-32 min-h-screen flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left: Typography & Intro -->
+                <div class="order-2 lg:order-1 stagger-anim">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface2 border border-white/5 text-gray-300 text-sm font-medium mb-8">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        Available for new opportunities
+                    </div>
+                    
+                    <h1 class="font-heading text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] mb-6">
+                        Hi, I'm <br>
+                        <span class="text-gradient">Lalan Kumar</span>
+                    </h1>
+                    
+                    <!-- JS Typewriter -->
+                    <div class="h-10 mb-6 flex items-center text-xl sm:text-2xl text-gray-400 font-medium">
+                        I am a <span id="typewriter" class="text-white ml-2"></span><span class="cursor">&nbsp;</span>
+                    </div>
+                    
+                    <p class="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed font-light">
+                        Electrical Engineering Student from Bihar building at the intersection of <strong class="text-white font-medium">Engineering, AI, & Software</strong>. I turn theoretical concepts into practical digital solutions.
+                    </p>
+                    
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="resume.pdf" target="_blank" class="btn-glow px-8 py-4 rounded-xl font-heading font-bold text-lg flex items-center gap-3">
+                            View Resume <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                        </a>
+                        <a href="#projects" class="px-8 py-4 rounded-xl bg-surface2 border border-white/10 font-heading font-bold text-lg hover:bg-white/5 hover:border-white/20 transition-all flex items-center gap-3">
+                            Explore Work <i class="fa-solid fa-arrow-down text-sm"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-6 mt-16 border-t border-white/10 pt-8 max-w-md">
+                        <div>
+                            <div class="font-heading font-bold text-3xl text-white">03+</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Projects</div>
+                        </div>
+                        <div>
+                            <div class="font-heading font-bold text-3xl text-white">4+</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Tech Stack</div>
+                        </div>
+                        <div>
+                            <div class="font-heading font-bold text-3xl text-white">100%</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Commitment</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Profile Image -->
+                <div class="order-1 lg:order-2 flex justify-center lg:justify-end stagger-anim">
+                    <div class="profile-container w-64 h-64 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px]">
+                        <!-- Note: Using 'my.png' as requested -->
+                        <img src="my.png" alt="Lalan Kumar Profile" onerror="this.src='https://ui-avatars.com/api/?name=Lalan+Kumar&background=0D8ABC&color=fff&size=500'" class="profile-image w-full h-full rounded-[2.5rem] shadow-2xl relative z-10 transition-transform duration-500 hover:scale-[1.02]">
+                        
+                        <!-- Floating Badges -->
+                        <div class="absolute -bottom-6 -left-6 bg-surface2 border border-white/10 px-6 py-4 rounded-2xl shadow-xl z-20 flex items-center gap-4 animate-[bounce_4s_infinite]">
+                            <div class="w-10 h-10 rounded-full bg-accent-cyan/10 flex items-center justify-center text-accent-cyan">
+                                <i class="fa-solid fa-bolt text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Student at</div>
+                                <div class="font-bold font-heading text-sm text-white">GP Banka (SBTE)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute top-10 -right-8 bg-surface2 border border-white/10 p-4 rounded-2xl shadow-xl z-20 animate-[bounce_5s_infinite_reverse]">
+                            <i class="fa-brands fa-python text-3xl text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Section (About & Skills Combined) -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 stagger-anim">
+                <h2 class="font-heading text-4xl lg:text-5xl font-bold mb-4">Inside My Universe</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">A look at what drives me, what I know, and my vision for the future.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[250px]">
+                
+                <!-- About Bento -->
+                <div class="bento-card md:col-span-2 lg:col-span-2 row-span-2 p-8 stagger-anim bento-hover">
+                    <div class="bento-content h-full flex flex-col">
+                        <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-user-astronaut text-xl text-white"></i>
+                        </div>
+                        <h3 class="font-heading text-3xl font-bold mb-4">My Philosophy</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6 text-lg">
+                            "Technology should not be learned only through theory. Learn → Understand → Practice → Build → Test → Improve → Deploy."
+                        </p>
+                        <p class="text-gray-500 text-sm mt-auto">
+                            I am not just interested in writing code; I want to build systems combining Electrical circuits with Artificial Intelligence to solve real problems.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Skill: Web Dev -->
+                <div class="bento-card p-8 stagger-anim bento-hover bg-gradient-to-br from-surface2 to-surface">
+                    <div class="bento-content h-full flex flex-col items-start justify-between">
+                        <i class="fa-brands fa-html5 text-4xl text-accent-cyan mb-4"></i>
+                        <div>
+                            <h4 class="font-heading font-bold text-xl mb-2">Web Dev</h4>
+                            <p class="text-gray-400 text-sm">HTML, CSS, JS, Tailwind, PWA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill: Python & AI -->
+                <div class="bento-card p-8 stagger-anim bento-hover bg-gradient-to-bl from-surface2 to-surface">
+                    <div class="bento-content h-full flex flex-col items-start justify-between">
+                        <i class="fa-brands fa-python text-4xl text-yellow-500 mb-4"></i>
+                        <div>
+                            <h4 class="font-heading font-bold text-xl mb-2">Python & AI</h4>
+                            <p class="text-gray-400 text-sm">Logic, Automation, Generative AI tools</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill: Electrical Eng -->
+                <div class="bento-card md:col-span-2 p-8 stagger-anim bento-hover relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 opacity-10">
+                        <i class="fa-solid fa-microchip text-9xl"></i>
+                    </div>
+                    <div class="bento-content h-full flex flex-col justify-center">
+                        <div class="inline-block px-3 py-1 bg-accent-purple/20 text-accent-purple border border-accent-purple/30 rounded-lg text-xs font-bold w-max mb-4">Core Focus</div>
+                        <h4 class="font-heading font-bold text-2xl mb-2">Electrical Engineering</h4>
+                        <p class="text-gray-400 max-w-sm">Circuits & Networks, AC/DC Systems, Power Generation, and Electrical Machines.</p>
+                    </div>
+                </div>
+
+                <!-- Education / Location -->
+                <div class="bento-card md:col-span-1 lg:col-span-2 p-8 stagger-anim bento-hover flex items-center gap-6">
+                    <div class="w-16 h-16 shrink-0 rounded-full bg-surface flex items-center justify-center border border-white/10">
+                        <i class="fa-solid fa-location-crosshairs text-2xl text-accent-blue"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-heading font-bold text-xl mb-1">Based in Banka, Bihar</h4>
+                        <p class="text-gray-400 text-sm">Currently pursuing Diploma (2025-2028)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Premium Cards) -->
+    <section id="projects" class="py-24 relative border-y border-white/5 bg-surface">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 stagger-anim">
+                <div>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold mb-4">Featured Work</h2>
+                    <p class="text-gray-400">Building digital platforms and content.</p>
+                </div>
+                <a href="https://github.com/lalankumar99" target="_blank" class="mt-6 md:mt-0 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors flex items-center gap-2 font-medium">
+                    View GitHub <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="group relative rounded-3xl overflow-hidden border border-white/10 bg-surface2 stagger-anim">
+                    <div class="h-72 bg-[#0f172a] relative overflow-hidden flex items-center justify-center p-8">
+                        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+                        <!-- Mockup / Visual -->
+                        <div class="w-full h-full bg-[#1e293b] rounded-xl border border-white/10 shadow-2xl relative z-10 flex flex-col">
+                            <div class="h-8 border-b border-white/10 flex items-center px-4 gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="flex-1 flex items-center justify-center text-accent-blue/40">
+                                <i class="fa-solid fa-graduation-cap text-6xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-heading text-2xl font-bold">POLYTECHNIC HUB</h3>
+                            <a href="https://youtube.com/@polytechnic_hub?si=qo5bvW-9QI90-hhd" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        </div>
+                        <p class="text-gray-400 mb-6">A complete EdTech platform envisioned for Polytechnic students. Features include student/teacher panels, PDF management, and test series.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-surface rounded-full text-xs text-gray-300 border border-white/5">PWA Support</span>
+                            <span class="px-3 py-1 bg-surface rounded-full text-xs text-gray-300 border border-white/5">Auth Systems</span>
+                            <span class="px-3 py-1 bg-surface rounded-full text-xs text-gray-300 border border-white/5">UI Dashboard</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative rounded-3xl overflow-hidden border border-white/10 bg-surface2 stagger-anim">
+                    <div class="h-72 bg-[#170f2a] relative overflow-hidden flex items-center justify-center p-8">
+                        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+                        <!-- Mockup / Visual -->
+                        <div class="w-full h-full bg-[#2a1e3b] rounded-xl border border-white/10 shadow-2xl relative z-10 flex flex-col">
+                            <div class="h-8 border-b border-white/10 flex items-center px-4 gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="flex-1 flex items-center justify-center text-accent-purple/40">
+                                <i class="fa-solid fa-play text-6xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-heading text-2xl font-bold">LK STUDY STUDIO</h3>
+                            <a href="https://youtube.com/@lk_smart_studies?si=Xg5DaA5frw246mqy" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        </div>
+                        <p class="text-gray-400 mb-6">An educational brand focusing on digital learning, study materials, and AI-assisted guidance to make resources easily accessible.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-surface rounded-full text-xs text-gray-300 border border-white/5">Content Creation</span>
+                            <span class="px-3 py-1 bg-surface rounded-full text-xs text-gray-300 border border-white/5">AI Guidelines</span>
+                            <span class="px-3 py-1 bg-surface rounded-full text-xs text-gray-300 border border-white/5">Digital Branding</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contact" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="bg-surface2 border border-white/10 rounded-[2.5rem] p-8 md:p-16 flex flex-col lg:flex-row gap-16 justify-between items-center stagger-anim">
+                
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold mb-6">Let's build something together.</h2>
+                    <p class="text-gray-400 mb-8 text-lg">Interested in Tech, AI, EdTech, or Electrical Engineering? Connect with me across platforms or drop a message on WhatsApp.</p>
+                    
+                    <a href="https://wa.me/message/JNTKA7PRMHDXL1" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-[#25d366] text-black font-bold font-heading rounded-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(37,211,102,0.3)]">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Chat on WhatsApp
+                    </a>
+                    
+                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-3 text-gray-400 font-medium">
+                        <i class="fa-solid fa-phone text-accent-blue"></i> +91 9296783086
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 w-full max-w-md">
+                    <div class="grid grid-cols-3 gap-4">
+                        <a href="https://www.linkedin.com/in/lalankumarbanka" target="_blank" class="social-link in mx-auto" title="LinkedIn (Eng)">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/lalankumardesign" target="_blank" class="social-link in mx-auto" title="LinkedIn (Design)">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/lalankumar99" target="_blank" class="social-link gh mx-auto" title="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/lk_lalan_bhai" target="_blank" class="social-link ig mx-auto" title="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/1MdSt1cwWf/" target="_blank" class="social-link fb mx-auto" title="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://youtube.com/@polytechnic_hub" target="_blank" class="social-link yt mx-auto" title="YouTube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-gray-500 text-sm border-t border-white/5 bg-bg">
+        <p class="font-heading">© <span id="year"></span> Lalan Kumar. Designed for the Future.</p>
+    </footer>
+
+    <!-- Premium Chatbot Widget -->
+    <div id="chatbot-widget">
+        <!-- Chat Window -->
+        <div id="chat-window" class="bg-surface2 border border-white/10 rounded-2xl mb-6 overflow-hidden flex flex-col">
+            <!-- Header -->
+            <div class="bg-surface p-4 border-b border-white/10 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <img src="my.png" onerror="this.src='https://ui-avatars.com/api/?name=AI&background=0D8ABC&color=fff'" class="w-10 h-10 rounded-full object-cover border border-white/10">
+                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-surface"></div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold font-heading text-white">Lalan AI Bot</div>
+                        <div class="text-xs text-green-400">Always active</div>
+                    </div>
+                </div>
+                <button id="close-chat" class="text-gray-400 hover:text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <!-- Chat Body -->
+            <div id="chat-body" class="flex-1 h-64 p-4 overflow-y-auto flex flex-col gap-4 text-sm bg-bg/50">
+                <div class="self-start bg-surface text-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[85%] border border-white/5">
+                    Hi! I'm Lalan's AI assistant. Ask me for his resume, skills, or projects.
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="p-3 bg-surface border-t border-white/10 flex gap-2 items-center">
+                <input type="text" id="chat-input" placeholder="Message..." class="flex-1 bg-bg border border-white/10 rounded-full px-4 py-2.5 text-white text-sm focus:outline-none focus:border-accent-cyan/50 transition-colors">
+                <button id="send-msg" class="w-10 h-10 rounded-full bg-accent-cyan text-bg flex items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Toggle Button -->
+        <button id="toggle-chat" class="w-14 h-14 rounded-full bg-surface2 border border-white/10 text-white text-xl shadow-[0_0_20px_rgba(0,242,254,0.15)] hover:border-accent-cyan/50 hover:text-accent-cyan transition-all flex items-center justify-center float-right relative group">
+            <i class="fa-solid fa-comment-dots group-hover:hidden"></i>
+            <i class="fa-solid fa-robot hidden group-hover:block"></i>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-accent-cyan rounded-full animate-ping"></span>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-accent-cyan rounded-full"></span>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Update Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Typewriter Effect (Smooth)
+        const words = ["Developer", "AI Enthusiast", "Digital Creator", "EdTech Builder"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById("typewriter");
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 30 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener("DOMContentLoaded", type);
+
+        // Advanced Mouse Hover for Bento Cards
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stagger-anim').forEach(el => {
+            observer.observe(el);
+        });
+
+        // AI Chatbot Logic
+        const chatWindow = document.getElementById('chat-window');
+        const toggleChat = document.getElementById('toggle-chat');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendMsgBtn = document.getElementById('send-msg');
+        const chatBody = document.getElementById('chat-body');
+
+        toggleChat.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+            if(chatWindow.classList.contains('active')) chatInput.focus();
+        });
+        closeChat.addEventListener('click', () => chatWindow.classList.remove('active'));
+
+        const botReplies = {
+            "hello": "Hi there! I am Lalan's assistant. How can I help?",
+            "hi": "Hello! Welcome to Lalan's premium portfolio.",
+            "skills": "Lalan works with Web Dev (HTML/CSS/JS), Python, Generative AI, and Electrical Engineering.",
+            "projects": "His top projects are POLYTECHNIC HUB and LK STUDY STUDIO. Check the projects section below!",
+            "resume": "Click the shiny 'Resume' button at the top to download resume.pdf instantly!",
+            "contact": "Click the WhatsApp button in the contact section or call +91 9296783086.",
+            "default": "That's awesome! Please connect with Lalan on WhatsApp or LinkedIn for a proper chat."
+        };
+
+        function addMessage(text, isUser = false) {
+            const div = document.createElement('div');
+            div.className = `p-3 rounded-2xl max-w-[85%] text-sm ${isUser ? 'self-end bg-accent-cyan text-bg rounded-tr-none font-medium' : 'self-start bg-surface text-gray-200 rounded-tl-none border border-white/5'}`;
+            div.textContent = text;
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const div = document.createElement('div');
+            div.id = 'typing-indicator';
+            div.className = 'self-start bg-surface text-gray-200 p-3 rounded-2xl rounded-tl-none border border-white/5 typing-indicator flex gap-1 items-center h-10';
+            div.innerHTML = '<span></span><span></span><span></span>';
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const el = document.getElementById('typing-indicator');
+            if(el) el.remove();
+        }
+
+        function handleChat() {
+            const text = chatInput.value.trim().toLowerCase();
+            if (!text) return;
+            
+            addMessage(chatInput.value, true);
+            chatInput.value = '';
+            
+            showTypingIndicator();
+
+            setTimeout(() => {
+                removeTypingIndicator();
+                let reply = botReplies["default"];
+                for (let key in botReplies) {
+                    if (text.includes(key)) {
+                        reply = botReplies[key];
+                        break;
+                    }
+                }
+                addMessage(reply, false);
+            }, 1200); // 1.2s delay for realism
+        }
+
+        sendMsgBtn.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') handleChat();
+        });
+    </script>
+</body>
+</html>
